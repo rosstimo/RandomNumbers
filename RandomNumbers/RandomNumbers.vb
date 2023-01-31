@@ -5,9 +5,8 @@ Imports System
 
 Module RandomNumbers
     Sub Main(args As String())
-        For i = 0 To 100
-            Console.WriteLine(RandomNumber(5))
-        Next
+        TestRandomness()
+
     End Sub
 
     Function RandomNumberExample() As Integer
@@ -46,5 +45,14 @@ Module RandomNumbers
         Return _randomNumber
     End Function
 
+    Sub TestRandomness()
+        Dim temp As Integer
+        Dim numbers(6) As Integer
 
+        For i = 0 To 10000
+            temp = RandomNumber(5)
+            numbers(temp) += 1
+        Next
+        'TODO print array in nice columns
+    End Sub
 End Module
