@@ -37,24 +37,35 @@ Module RandomNumbers
     ''' </summary>
     ''' <param name="max"></param>
     ''' <returns>a random integer</returns>
-    Function RandomNumber(max As Integer) As Integer
+    Function LessRandomNumber(max As Integer) As Integer
         Dim _randomNumber As Integer
         ' Dim max As Integer = 10
         Randomize()
         _randomNumber = CInt(Math.Round(Rnd() * max))
         Return _randomNumber
     End Function
+    Function RandomNumber(max As Integer) As Integer
+        Dim _randomNumber As Integer
+        ' Dim max As Integer = 10
+        Randomize()
+        _randomNumber = CInt(Math.Floor(Rnd() * (max + 1)))
+        Return _randomNumber
+    End Function
 
     Sub TestRandomness()
         Dim temp As Integer
-        Dim numbers(6) As Integer
+        Dim range As Integer = 1
+        Dim numbers(range) As Integer
         Dim row As String
         Dim formattedColumn As String
-        Dim columnWidth As Integer = 8
+        Dim columnWidth As Integer = 0
 
-        For i = 0 To 100000
-            temp = RandomNumber(5)
+        For i = 0 To 1000000
+            temp = RandomNumber(range)
             numbers(temp) += 1
+            If Len(CStr(numbers(temp))) + 4 > columnWidth Then
+                columnWidth = Len(CStr(numbers(temp))) + 4
+            End If
         Next
 
         'add header row
