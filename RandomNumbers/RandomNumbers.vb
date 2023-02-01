@@ -48,11 +48,33 @@ Module RandomNumbers
     Sub TestRandomness()
         Dim temp As Integer
         Dim numbers(6) As Integer
+        Dim row As String
+        Dim formattedColumn As String
+        Dim columnWidth As Integer = 8
 
-        For i = 0 To 10000
+        For i = 0 To 100000
             temp = RandomNumber(5)
             numbers(temp) += 1
         Next
-        'TODO print array in nice columns
+
+        'add header row
+        For i = LBound(numbers) To UBound(numbers)
+            formattedColumn = i & " |"
+            row &= formattedColumn.PadLeft(columnWidth)
+        Next
+        Console.WriteLine(row)
+
+        'add separator row
+        Console.WriteLine(StrDup(columnWidth * (UBound(numbers) + 1), "-"))
+
+        'add data row
+        row = ""
+        For i = LBound(numbers) To UBound(numbers)
+            formattedColumn = numbers(i) & " |"
+            row &= formattedColumn.PadLeft(columnWidth)
+        Next
+
+        Console.WriteLine(row)
+
     End Sub
 End Module
